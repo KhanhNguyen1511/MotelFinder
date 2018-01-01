@@ -1,11 +1,13 @@
 package com.example.mrm82.motelfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,10 +16,11 @@ import java.util.ArrayList;
  * Created by mrm82 on 23/12/2017.
  */
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
     ArrayList<BaiDangConstruct> listPost;
     Context context;
+
 
     public PostAdapter(ArrayList<BaiDangConstruct> listPost, Context context){
         this.listPost=listPost;
@@ -41,10 +44,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtType.setText(listPost.get(position).getPostType());
     }
 
+
+
     @Override
     public int getItemCount() {
         return listPost.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle,txtArea,txtPrice,txtType;
@@ -57,6 +64,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             txtType= itemView.findViewById(R.id.txtpostType);
             txtPrice = itemView.findViewById(R.id.txtprice);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context,Post_Info.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                }
+            });
         }
+
+
     }
+
 }
